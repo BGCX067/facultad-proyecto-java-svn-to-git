@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:flow="http://www.springframework.org/schema/webflow-config"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/webflow-config
+           http://www.springframework.org/schema/webflow-config/spring-webflow-config-1.0.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<!-- Launches new flow executions and resumes existing executions. -->	
+	<flow:executor id="flowExecutor" registry-ref="flowRegistry">
+		<flow:execution-attributes>
+		  <flow:alwaysRedirectOnPause value="false"/>
+		</flow:execution-attributes>
+	</flow:executor>
+	
+	<!-- Creates the registry of flow definitions for this application -->
+	<flow:registry id="flowRegistry">
+		<flow:location path="/WEB-INF/apps/**/config/spring-flow-*.xml"/>
+	</flow:registry>
+	
+	<bean id="struts2FlowAdapter" class="com.googlecode.struts2webflow.Struts2FlowAdapter"></bean>
+	
+	
+	<!-- The singleton hibernate session factory -->
+	<bean id="sessionFactory" scope="singleton" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="configLocation" value="hibernate.cfg.xml" />
+	</bean>
+	
+	<!-- Spring's hibernate transaction manager -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- So classes/functions with @Transactional get a hibernate txn -->
+	<tx:annotation-driven />
+	
+</beans>

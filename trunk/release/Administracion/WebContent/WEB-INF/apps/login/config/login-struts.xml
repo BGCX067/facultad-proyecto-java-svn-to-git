@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="login" namespace="/login" extends="struts-default">
+		<result-types>
+			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		
+		<interceptors>
+			<interceptor name="sessionFlowExecKey"
+				class="com.googlecode.struts2webflow.SessionFlowExecKeyInterceptor" />
+			<interceptor name="annotationflowScope"
+				class="com.googlecode.struts2webflow.annotations.AnnotationFlowScopeInterceptor" />
+		</interceptors>
+		
+		<action name="flow" class="com.googlecode.struts2webflow.FlowAction">
+			<interceptor-ref name="sessionFlowExecKey" />
+			<interceptor-ref name="defaultStack" />
+			<param name="flowId">spring-flow-login</param>
+			
+			<result name="InputUser">/WEB-INF/apps/login/jsp/inputUser.jsp</result>
+			<result name="ValidateUser" type="redirect">ValidateUser.action</result>
+			<result name="validationSuccess" type="tiles">welcome</result>
+			<result name="validationError">/WEB-INF/apps/login/jsp/validationError.jsp</result>
+		</action>
+		
+		<action name="ValidateUser" class="login.actions.InputUserBean"	method="validateUser">
+			<interceptor-ref name="annotationflowScope" />
+            <interceptor-ref name="defaultStack" />			
+		</action>
+	</package>
+</struts>

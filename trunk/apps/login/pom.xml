@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>administracion.apps</groupId>
+	<artifactId>login</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>login</name>
+	<repositories>
+		<repository>			
+			<id>struts2scopeplugin-snapshot-maven-repo</id>
+			<url>
+				svn:https://struts2webflow.googlecode.com/svn/trunk/maven-repo
+			</url>
+		</repository>
+		<repository>			
+			<id>struts2plugin-maven-repo</id>
+			<url>
+				svn:https://struts2plugin-maven-repo.googlecode.com/svn/trunk/
+			</url>
+		</repository>
+	</repositories>		
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts-core</artifactId>
+			<version>1.3.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts.xwork</groupId>
+			<artifactId>xwork-core</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.struts2webflow</groupId>
+			<artifactId>struts2webflow-plugin</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>adminstracion.services</groupId>
+			<artifactId>loginService</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+</project>
